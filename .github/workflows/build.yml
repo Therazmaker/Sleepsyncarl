@@ -34,8 +34,12 @@ jobs:
           name: build-log
           path: build.log
 
+      - name: Listar APKs generados
+        run: find . -name "*.apk"
+
       - uses: actions/upload-artifact@v4
         if: success()
         with:
           name: sleepsync-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: '**/*.apk'
+          if-no-files-found: error
