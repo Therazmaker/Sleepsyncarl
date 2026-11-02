@@ -191,10 +191,10 @@ class MainActivity : ComponentActivity() {
     private fun stageName(type: Int) = when (type) {
         SleepSessionRecord.STAGE_TYPE_AWAKE -> "awake"
         SleepSessionRecord.STAGE_TYPE_SLEEPING -> "sleeping"
-        SleepSessionRecord.STAGE_TYPE_AWAKE_OUT_OF_BED -> "out_of_bed"
-        SleepSessionRecord.STAGE_TYPE_SLEEPING_LIGHT -> "light"
-        SleepSessionRecord.STAGE_TYPE_SLEEPING_DEEP -> "deep"
-        SleepSessionRecord.STAGE_TYPE_SLEEPING_REM -> "rem"
+        SleepSessionRecord.STAGE_TYPE_OUT_OF_BED -> "out_of_bed"
+        SleepSessionRecord.STAGE_TYPE_LIGHT -> "light"
+        SleepSessionRecord.STAGE_TYPE_DEEP -> "deep"
+        SleepSessionRecord.STAGE_TYPE_REM -> "rem"
         SleepSessionRecord.STAGE_TYPE_AWAKE_IN_BED -> "awake_in_bed"
         else -> "unknown"
     }
