@@ -37,11 +37,8 @@ jobs:
       - name: Reportar log a anotaciones
         if: always()
         run: |
-          tail -n 25 build.log | while IFS= read -r line; do
-            echo "::notice title=Gradle::$line"
-          done
-          find app -name "*.apk" | while IFS= read -r f; do
-            echo "::notice title=APK::$f"
+          grep -E "(Caused by:|e: |FAILURE:|What went wrong:)" build.log -A 3 | head -n 25 | while IFS= read -r line; do
+            echo "::error title=Gradle::$line"
           done
 
       - uses: actions/upload-artifact@v4
