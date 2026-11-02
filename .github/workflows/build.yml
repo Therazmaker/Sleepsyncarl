@@ -25,7 +25,7 @@ jobs:
 
       - name: Compilar APK debug
         run: |
-          gradle assembleDebug --no-daemon --stacktrace 2>&1 | tee build.log
+          gradle :app:assembleDebug --no-daemon --stacktrace 2>&1 | tee build.log
 
       - name: Subir log de compilacion
         if: always()
@@ -34,8 +34,15 @@ jobs:
           name: build-log
           path: build.log
 
-      - name: Listar APKs generados
-        run: find . -name "*.apk"
+      - name: Reportar log a anotaciones
+        if: always()
+        run: |
+          tail -n 25 build.log | while IFS= read -r line; do
+            echo "::notice title=Gradle::$line"
+          done
+          find app -name "*.apk" | while IFS= read -r f; do
+            echo "::notice title=APK::$f"
+          done
 
       - uses: actions/upload-artifact@v4
         if: success()
